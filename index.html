@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>朱柬机· 作品集｜应届生 · 产品 × AI 应用</title>
+<!--
+  ============================================================================
+  使用说明（发面试官前，把下面「待填」的占位替换掉即可）：
+
+  ✅ 已填：姓名（朱柬机）、邮箱
+  【一、替换个人信息】搜索「【」就能找到剩余待填占位：
+      【你的电话】    → 电话（可留空删掉）
+      【你的GitHub】  → GitHub 主页（没有就删掉对应按钮）
+      【你的简历】    → 简历 PDF 的文件名，例如 resume.pdf（放进本文件夹）
+      【项目仓库链接】→ 回神 App 的 GitHub 仓库地址（没有可删掉该行）
+      【APK下载链接】 → APK 文件地址，例如 huishen.apk（放进本文件夹）
+
+  【二、放图片】按下面名字放进 images/ 文件夹（.jpg 或 .png 都行），页面会自动显示：
+      images/avatar        你的头像（正方形，建议 512×512）
+      images/home          主页截图（竖屏）
+      images/intercept     拦截 / 呼吸引导页截图（竖屏）
+      images/review        数据复盘页截图（竖屏）
+      没放图片时，对应位置会显示占位提示，不会破版。
+
+  【三、放演示视频】放到 video/demo.mp4（横屏 16:9，建议 2~5 分钟，100MB 以内）。
+      没放视频时，视频位会显示「演示视频待上传」，不会报错。
+
+  部署方式（任选其一）：
+     A. 整个 portfolio 文件夹打包发给面试官，对方打开 index.html 即可看。
+     B. 推到 GitHub 仓库 → Settings → Pages → 选 main 分支根目录，得到在线链接。
+  ============================================================================
+-->
+<style>
+  :root{
+    --teal:#0d9488; --teal-dark:#0f766e; --teal-soft:#ccfbf1;
+    --ink:#0f172a; --muted:#5b6b7f; --line:#e2e8f0; --bg:#f8fafc;
+    --card:#ffffff; --accent:#14b8a6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    color:var(--ink); background:var(--bg); line-height:1.75; -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+
+  /* 导航 */
+  header{
+    position:sticky;top:0;z-index:50;background:rgba(255,255,255,.86);
+    backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:62px}
+  .nav .logo{font-weight:700;font-size:17px;letter-spacing:.5px}
+  .nav .logo span{color:var(--accent)}
+  .nav nav a{margin-left:22px;color:var(--muted);font-size:14.5px;transition:color .15s}
+  .nav nav a:hover{color:var(--ink)}
+
+  /* 首屏 */
+  .hero{padding:80px 0 48px}
+  .hero .grid{display:grid;grid-template-columns:auto 1fr;gap:34px;align-items:center}
+  .avatar{
+    width:124px;height:124px;border-radius:50%;position:relative;overflow:hidden;
+    background:linear-gradient(135deg,#a7f3e6,#5eead4 42%,#0d9488);
+    display:flex;align-items:center;justify-content:center;color:#fff;font-size:40px;font-weight:700;
+    box-shadow:0 12px 30px rgba(13,148,136,.25);
+  }
+  .avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .hero h1{font-size:34px;line-height:1.28;margin-bottom:8px}
+  .hero h1 .name{background:linear-gradient(90deg,var(--teal),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero .role{font-size:18px;color:var(--teal-dark);font-weight:600;margin-bottom:8px}
+  .hero .bio{color:var(--muted);max-width:600px;margin-bottom:22px}
+  .cta{display:flex;flex-wrap:wrap;gap:12px}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:10px;
+    font-size:15px;font-weight:600;transition:transform .12s,box-shadow .12s,background .12s;border:1px solid transparent;
+  }
+  .btn:hover{transform:translateY(-1px)}
+  .btn-primary{background:var(--teal);color:#fff;box-shadow:0 6px 18px rgba(13,148,136,.28)}
+  .btn-primary:hover{background:var(--teal-dark)}
+  .btn-ghost{background:#fff;border-color:var(--line);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--teal)}
+
+  /* 通用 section */
+  section{padding:42px 0}
+  .sec-title{font-size:26px;margin-bottom:6px}
+  .sec-title .num{color:var(--accent);margin-right:8px}
+  .sec-sub{color:var(--muted);margin-bottom:28px}
+
+  /* 关于我 */
+  .about p{color:#334155;max-width:800px;margin-bottom:14px}
+  .about strong{color:var(--ink)}
+
+  /* 技能（分组） */
+  .skill-groups{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .skill-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+  .skill-card h3{font-size:16px;color:var(--teal-dark);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .skill-card h3 .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+  .skill-card ul{list-style:none}
+  .skill-card li{padding-left:18px;position:relative;margin-bottom:7px;color:#475569;font-size:14.5px}
+  .skill-card li::before{content:"▸";position:absolute;left:0;color:var(--accent);font-weight:700}
+
+  /* 项目卡片 */
+  .project{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:34px;margin-bottom:28px}
+  .project.featured{border-color:#99f6e4;box-shadow:0 14px 44px rgba(13,148,136,.10)}
+  .project .top{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+  .project .top h3{font-size:23px}
+  .project .badge{
+    font-size:12px;font-weight:700;color:#fff;background:var(--accent);border-radius:6px;padding:3px 10px;letter-spacing:.5px;
+  }
+  .project .one-line{color:var(--muted);margin-bottom:18px;font-size:15.5px}
+  .project h4{font-size:15px;margin:20px 0 8px;color:var(--teal-dark)}
+  .project ul{list-style:none}
+  .project ul li{padding-left:22px;position:relative;margin-bottom:7px;color:#334155}
+  .project ul li::before{content:"▸";position:absolute;left:0;color:var(--accent);font-weight:700}
+  .tech{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .tech span{
+    font-size:12.5px;padding:4px 12px;border-radius:999px;background:#f1f5f9;color:#475569;border:1px solid var(--line);
+  }
+
+  /* 截图 */
+  .shots{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:12px}
+  .shot{
+    position:relative;aspect-ratio:9/19;border:2px dashed var(--line);border-radius:12px;overflow:hidden;
+    background:#fafcff;
+  }
+  .shot .ph{
+    position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    color:var(--muted);font-size:13px;text-align:center;padding:10px;
+  }
+  .shot .ph b{color:var(--teal-dark);display:block;margin-bottom:6px;font-size:15px}
+  .shot .ph em{font-style:normal;color:#94a3b8;font-size:12px;margin-top:4px}
+  .shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+
+  /* 演示视频 */
+  .video-wrap{position:relative;margin:24px auto 0;border-radius:14px;overflow:hidden;background:#0f172a;width:min(100%,400px);aspect-ratio:9/16;max-height:76vh}
+  .video-wrap video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:1}
+  .video-ph{
+    position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;
+    color:#94a3b8;font-size:15px;text-align:center;
+  }
+  .video-ph b{color:#e2e8f0;font-size:18px;margin-bottom:8px;display:block}
+  .video-ph em{font-style:normal;color:#64748b;font-size:13px;margin-top:6px}
+
+  /* 实践经历 */
+  .exp{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px 26px;margin-bottom:16px}
+  .exp .head{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+  .exp .head h3{font-size:17px}
+  .exp .head span{font-size:13px;color:var(--teal-dark);font-weight:600}
+  .exp ul{list-style:none}
+  .exp ul li{padding-left:20px;position:relative;margin-bottom:6px;color:#334155;font-size:14.5px}
+  .exp ul li::before{content:"·";position:absolute;left:4px;color:var(--accent);font-weight:700}
+
+  .links{display:flex;flex-wrap:wrap;gap:14px;margin-top:20px}
+  .link{font-size:14.5px;font-weight:600;color:var(--teal);border-bottom:1px dashed var(--accent);padding-bottom:1px}
+  .link:hover{color:var(--teal-dark)}
+
+  /* 页脚 */
+  footer{border-top:1px solid var(--line);padding:38px 0;margin-top:20px;text-align:center;color:var(--muted)}
+  footer a{color:var(--teal)}
+
+  @media (max-width:760px){
+    .hero .grid{grid-template-columns:1fr;text-align:center}
+    .avatar{margin:0 auto}
+    .cta{justify-content:center}
+    .shots{grid-template-columns:1fr}
+    .shot{aspect-ratio:9/16}
+    .skill-groups{grid-template-columns:1fr}
+    .nav nav a{margin-left:14px;font-size:13.5px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="logo">朱柬机<span>· Portfolio</span></div>
+    <nav>
+      <a href="#about">关于我</a>
+      <a href="#project">项目</a>
+      <a href="#exp">实践</a>
+      <a href="#contact">联系</a>
+    </nav>
+  </div>
+</header>
+
+<!-- 首屏 -->
+<section class="hero">
+  <div class="wrap grid">
+    <div class="avatar"><span>名</span><img src="images/avatar.jpg" alt="头像" onerror="if(this.dataset.t){this.remove()}else{this.dataset.t=1;this.src='images/avatar.png'}"></div>
+    <div>
+      <h1>你好，我是 <span class="name">朱柬机</span></h1>
+      <div class="role">2026 届应届毕业生 · 物联网工程 · 本科</div>
+      <p class="bio">
+        独立用 AI 编程助手从 0 到 1 做出了产品「回神」——一个真正跑在手机上的 Android 应用。
+        我的定位不是「只懂技术」或「只懂业务」，而是<strong>能把一个痛点翻译成产品方案、再用 AI 把方案落地</strong>的人。
+      </p>
+      <div class="cta">
+        <a class="btn btn-primary" href="#project">查看项目 ↓</a>
+        <a class="btn btn-ghost" href="#video">看演示视频 ▶</a>
+        <a class="btn btn-ghost" href="【你的简历】" target="_blank">下载简历 PDF</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 关于我 -->
+<section id="about">
+  <div class="wrap">
+    <h2 class="sec-title"><span class="num">01</span>关于我</h2>
+    <p class="sec-sub">应届生，没有大厂履历，但有一个完整走完闭环的项目。</p>
+    <div class="about">
+      <p>江苏理工学院物联网工程本科应届毕业生。我没有光鲜的实习背景，但我用 AI 编程助手<strong>独立从 0 到 1 做完了「回神」</strong>——一个在真机上跑起来、修复了 11 个真实 bug 的 Android 产品，走通了「需求洞察 → 产品定义 → MVP → 20+ 轮迭代 → 测试与文档」的完整闭环。</p>
+      <p>两段一线实习（<strong>电话销售</strong> + <strong>文旅现场运营</strong>）让我习惯和数据、和真实用户打交道，也锻炼了抗压与现场统筹能力。</p>
+      <p>我认为应届生最大的竞争力不是「会什么」，而是<strong>学习速度</strong>和<strong>把想法变成可用产品的能力</strong>——这两点，我用「回神」证明过了。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 项目 -->
+<section id="project">
+  <div class="wrap">
+
+    <!-- 精选项目：回神 -->
+    <div class="project featured">
+      <div class="top">
+        <h3>回神 · 防沉迷自律工具</h3>
+        <span class="badge">独立项目 · 0 → 1</span>
+      </div>
+      <p class="one-line">一个在你「手滑」打开娱乐 App 前，先拦住你的 Android 应用——用呼吸引导 + 意图问答 + 二选一关卡，帮你夺回注意力。</p>
+
+      <h4>项目背景</h4>
+      <ul>
+        <li>「一刷就停不下来」的根源，是「打开」这个动作太顺滑、没有摩擦。</li>
+        <li>回神在「打开」与「沉迷」之间，插入一段有意识的停顿，让你重新掌握主动权。</li>
+      </ul>
+
+      <h4>核心功能</h4>
+      <ul>
+        <li>打开即拦截：无障碍服务监听前台应用，打开目标 App 立刻弹出整屏引导。</li>
+        <li>呼吸引导：内置 5 种呼吸法，先平复情绪，再做决定。</li>
+        <li>意图问答：回答「你现在打开它是为了什么」。</li>
+        <li>二选一关卡：仍要打开 / 还是退出——退出会返回桌面并结束目标 App。</li>
+        <li>使用时长提醒：连续使用超时自动提醒。</li>
+        <li>记录与激励：睡眠记录、感恩日记、自律积分。</li>
+        <li>数据复盘：周报可视化（饼图 / 柱状图 / 小时热力图 / 月历）。</li>
+        <li>数据导出：一键导出 .xlsx，零第三方依赖手写生成。</li>
+      </ul>
+
+      <h4>技术亮点</h4>
+      <ul>
+        <li>基于 AccessibilityService 实现全局「打开前拦截」，无需 root。</li>
+        <li>整屏拦截 + 退出时返回桌面并清理目标 App 进程。</li>
+        <li>纯 Canvas 自绘 4 种图表（饼图 / 柱状图 / 热力图 / 月历），不依赖任何图表库。</li>
+        <li>零第三方库手写 OOXML 生成 .xlsx 文件。</li>
+        <li>本地意图识别（IntentClassifier），根据用户关键词做意图分类——刻意用本地规则而非大模型，零成本、零延迟、无幻觉。</li>
+      </ul>
+
+      <div class="tech">
+        <span>Kotlin</span><span>AccessibilityService</span><span>自定义 View / Canvas</span>
+        <span>Material 3</span><span>SharedPreferences</span><span>AlarmManager</span><span>手写 xlsx</span>
+      </div>
+
+      <!-- 截图：把 images/home.png、intercept.png、review.png 放进来即自动显示 -->
+      <div class="shots">
+        <div class="shot">
+          <div class="ph"><b>主页</b>三色权限状态 + 导航<em>images/home.jpg 或 .png</em></div>
+          <img src="images/home.jpg" alt="主页截图" onerror="if(this.dataset.t){this.remove()}else{this.dataset.t=1;this.src='images/home.png'}">
+        </div>
+        <div class="shot">
+          <div class="ph"><b>拦截页</b>呼吸引导 + 二选一<em>images/intercept.jpg 或 .png</em></div>
+          <img src="images/intercept.jpg" alt="拦截页截图" onerror="if(this.dataset.t){this.remove()}else{this.dataset.t=1;this.src='images/intercept.png'}">
+        </div>
+        <div class="shot">
+          <div class="ph"><b>复盘</b>饼图 / 热力图 / 月历<em>images/review.jpg 或 .png</em></div>
+          <img src="images/review.jpg" alt="复盘截图" onerror="if(this.dataset.t){this.remove()}else{this.dataset.t=1;this.src='images/review.png'}">
+        </div>
+      </div>
+
+      <!-- 演示视频：把 video/demo.mp4 放进来即自动播放 -->
+      <div class="video-wrap" id="video">
+        <div class="video-ph"><b>▶ 演示视频</b>把视频文件放到 video/demo.mp4 即可展示<em>video/demo.mp4</em></div>
+        <video src="video/demo.mp4" controls preload="metadata" playsinline webkit-playsinline x5-playsinline x5-video-player-type="h5" x5-video-player-fullscreen="false" x5-video-orientation="portrait" poster="images/video-poster.png"></video>
+      </div>
+
+      <div class="links">
+        <a class="link" href="【项目仓库链接】" target="_blank">GitHub 仓库</a>
+        <a class="link" href="【APK下载链接】" target="_blank">下载 APK 体验</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 实践经历 -->
+<section id="exp">
+  <div class="wrap">
+    <h2 class="sec-title"><span class="num">02</span>实践经历</h2>
+    <p class="sec-sub">两段一线实习，让我习惯和真实用户、真实数据打交道。</p>
+
+    <div class="exp">
+      <div class="head"><h3>龙之梦太湖演艺城 · 互动演艺 NPC</h3><span>现场运营 · 面向高客流</span></div>
+      <ul>
+        <li>多个互动点位轮岗，快速掌握多套差异化游戏规则，适应高频场景切换。</li>
+        <li>国庆客流高峰，以「简化规则 + 每人一次 + 排队有序」解决围堵、插队、反复刷银票，保持零客诉、零安全事故（日均触达约 500 人次）。</li>
+        <li>建立用户分层引导策略（老年 / 年轻游客差异化），平衡人流量与参与公平性；配合运营团队拍摄短视频。</li>
+      </ul>
+    </div>
+
+    <div class="exp">
+      <div class="head"><h3>真岛集团 · 电话销售实习生</h3><span>销售 · 面向数据</span></div>
+      <ul>
+        <li>日均有效触达 425+ 通，保持约 1 小时有效通话，日均产出 1–2 个意向客户。</li>
+        <li>形成开场破冰与异议处理话术，理解「线索—触达—转化—跟进」的完整销售漏斗。</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- 技能 -->
+<section id="skills">
+  <div class="wrap">
+    <h2 class="sec-title"><span class="num">03</span>技能</h2>
+    <p class="sec-sub">我投的是「产品 × AI 应用」方向，技术是我的落地手段，不是我的全部。</p>
+    <div class="skill-groups">
+      <div class="skill-card">
+        <h3><span class="dot"></span>产品</h3>
+        <ul>
+          <li>需求分析</li>
+          <li>PRD / FAQ / SOP 文档</li>
+          <li>竞品分析</li>
+          <li>数据复盘</li>
+          <li>测试用例设计</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3><span class="dot"></span>工具</h3>
+        <ul>
+          <li>AI 编程助手（DeepSeek / Coze）</li>
+          <li>Android Studio</li>
+          <li>Git</li>
+          <li>SQL 基础</li>
+          <li>Excel / PPT</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3><span class="dot"></span>技术理解</h3>
+        <ul>
+          <li>无障碍服务</li>
+          <li>自定义 View / Canvas</li>
+          <li>本地规则引擎</li>
+          <li>手写 xlsx</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 联系 -->
+<section id="contact">
+  <div class="wrap">
+    <h2 class="sec-title"><span class="num">04</span>联系方式</h2>
+    <p class="sec-sub">让面试官能第一时间找到你。</p>
+    <div class="cta">
+      <a class="btn btn-ghost" href="mailto:1635900529@qq.com">📧 1635900529@qq.com</a>
+      <a class="btn btn-ghost" href="tel:【你的电话】">📱 【你的电话】</a>
+      <a class="btn btn-primary" href="https://github.com/【你的GitHub】" target="_blank">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    © 2026 <a href="#">朱柬机</a> · 用 <a href="【项目仓库链接】" target="_blank">回神</a> 构建的在线作品集
+  </div>
+</footer>
+
+<script>
+  // 视频文件不存在时，自动隐藏空播放器、显示占位提示，不报错
+  document.querySelectorAll('video').forEach(function(v){
+    v.addEventListener('error', function(){
+      var w = v.closest('.video-wrap');
+      if (w) { w.querySelector('.video-ph').style.display = 'flex'; v.remove(); }
+    });
+  });
+</script>
+
+</body>
+</html>
